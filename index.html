@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEALTH JOURNAL | 富裕層向け資産運用メディア</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0A2342;
+            --primary: #1F4068;
+            --primary-light: #4D648D;
+            --accent: #EEB868;
+            --accent-dark: #CE9746;
+            --light: #F0F4F8;
+            --grey: #CED3DC;
+            --dark: #1C1C1C;
+        }
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        h1, h2, h3, h4, .serif {
+            font-family: 'Playfair Display', 'Noto Sans JP', serif;
+        }
+        .bg-primary-dark {
+            background-color: var(--primary-dark);
+        }
+        .bg-primary {
+            background-color: var(--primary);
+        }
+        .bg-primary-light {
+            background-color: var(--primary-light);
+        }
+        .text-primary-dark {
+            color: var(--primary-dark);
+        }
+        .text-primary {
+            color: var(--primary);
+        }
+        .text-primary-light {
+            color: var(--primary-light);
+        }
+        .bg-accent {
+            background-color: var(--accent);
+        }
+        .text-accent {
+            color: var(--accent);
+        }
+        .border-primary {
+            border-color: var(--primary);
+        }
+        .border-accent {
+            border-color: var(--accent);
+        }
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+        .article-card {
+            transition: all 0.3s ease;
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .gradient-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%);
+        }
+        .featured-article {
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+        }
+        .category-badge {
+            transition: all 0.2s ease;
+        }
+        .category-badge:hover {
+            background-color: var(--primary-dark);
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .active-nav::after {
+            width: 100%;
+        }
+        .hover-zoom {
+            overflow: hidden;
+        }
+        .hover-zoom img {
+            transition: transform 0.5s ease;
+        }
+        .hover-zoom:hover img {
+            transform: scale(1.05);
+        }
+        @media (max-width: 768px) {
+            .featured-article {
+                height: 350px;
+            }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: var(--light);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Top Bar -->
+    <div class="bg-primary-dark text-white py-2 px-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-sm">
+                資産形成の新しいスタンダード
+            </div>
+            <div class="flex space-x-4">
+                <a href="#" class="text-sm hover:text-accent transition-all"><i class="fas fa-user mr-1"></i>ログイン</a>
+                <a href="#" class="text-sm hover:text-accent transition-all"><i class="fas fa-search mr-1"></i>検索</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <a href="#" class="flex items-center">
+                        <div class="w-10 h-10 bg-primary-dark rounded-full flex items-center justify-center mr-2">
+                            <span class="text-white font-bold text-xl">W</span>
+                        </div>
+                        <h1 class="text-2xl font-bold text-primary-dark serif tracking-wide">WEALTH JOURNAL</h1>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-1">
+                    <a href="#" class="px-3 py-2 text-primary-dark hover:text-primary transition-all rounded-md nav-link active-nav">ホーム</a>
+                    <a href="#" class="px-3 py-2 text-primary-dark hover:text-primary transition-all rounded-md nav-link">最新記事</a>
+                    <a href="#" class="px-3 py-2 text-primary-dark hover:text-primary transition-all rounded-md nav-link">人気記事</a>
+                    <a href="#" class="px-3 py-2 text-primary-dark hover:text-primary transition-all rounded-md nav-link">セミナー</a>
+                    <a href="#" class="px-3 py-2 text-primary-dark hover:text-primary transition-all rounded-md nav-link">サービス</a>
+                    <a href="#" class="ml-2 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-all">お問い合わせ</a>
+                </div>
+                <button class="md:hidden text-primary-dark text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Categories Navigation -->
+    <nav class="bg-white border-t border-b border-gray-200">
+        <div class="container mx-auto px-4 py-1 overflow-x-auto custom-scrollbar">
+            <div class="flex space-x-2 md:space-x-4 whitespace-nowrap py-2">
+                <a href="#" class="px-3 py-1 text-sm bg-primary text-white rounded-md category-badge">全て</a>
+                <a href="#" class="px-3 py-1 text-sm bg-primary-light text-white rounded-md category-badge">IFA</a>
+                <a href="#" class="px-3 py-1 text-sm bg-primary-light text-white rounded-md category-badge">債券</a>
+                <a href="#" class="px-3 py-1 text-sm bg-primary-light text-white rounded-md category-badge">ヘッジファンド</a>
+                <a href="#" class="px-3 py-1 text-sm bg-primary-light text-white rounded-md category-badge">不動産</a>
+                <a href="#" class="px-3 py-1 text-sm bg-primary-light text-white rounded-md category-badge">資産運用</a>
+                <a href="#" class="px-3 py-1 text-sm bg-primary-light text-white rounded-md category-badge">相続</a>
+                <a href="#" class="px-3 py-1 text-sm bg-primary-light text-white rounded-md category-badge">税金</a>
+                <a href="#" class="px-3 py-1 text-sm bg-primary-light text-white rounded-md category-badge">経営者</a>
+                <a href="#" class="px-3 py-1 text-sm bg-primary-light text-white rounded-md category-badge">医師</a>
+                <a href="#" class="px-3 py-1 text-sm bg-primary-light text-white rounded-md category-badge">講座</a>
+                <a href="#" class="px-3 py-1 text-sm bg-primary-light text-white rounded-md category-badge">経済</a>
+                <a href="#" class="px-3 py-1 text-sm bg-primary-light text-white rounded-md category-badge">ライフスタイル</a>
+                <a href="#" class="px-3 py-1 text-sm bg-primary-light text-white rounded-md category-badge">対談</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Featured Article -->
+        <section class="mb-12">
+            <div class="featured-article rounded-xl overflow-hidden relative" style="background-image: url('https://images.unsplash.com/photo-1579532536935-619928decd08?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                <div class="absolute inset-0 gradient-overlay"></div>
+                <div class="absolute bottom-0 left-0 p-6 md:p-8 w-full">
+                    <span class="bg-accent text-primary-dark px-3 py-1 rounded-md text-sm font-medium mb-3 inline-block">資産運用</span>
+                    <h2 class="text-2xl md:text-4xl font-bold text-white mb-2">2025年以降の資産形成戦略：世界経済の変化に備える</h2>
+                    <p class="text-white text-opacity-90 mb-4 max-w-3xl">世界経済の構造変化が進む中、富裕層はどのような資産配分を考えるべきか。専門家が長期的視点での戦略を解説します。</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-gray-300 mr-3"></div>
+                        <div>
+                            <p class="text-white font-medium">山田太郎</p>
+                            <p class="text-white text-opacity-75 text-sm">2025年4月16日</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Articles -->
+        <section class="mb-16">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-primary-dark">最新記事</h2>
+                <a href="#" class="text-primary hover:text-primary-dark transition-all flex items-center">
+                    すべて見る <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Article 1 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-lg article-card">
+                    <div class="hover-zoom h-48 md:h-56">
+                        <img src="https://images.unsplash.com/photo-1560520031-3a4dc4e9de0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="債券投資" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-5">
+                        <span class="bg-primary-light text-white px-2 py-1 rounded text-xs">債券</span>
+                        <h3 class="text-xl font-bold my-2 text-primary-dark">世界の債券市場の現状と日本の投資家にとっての意義</h3>
+                        <p class="text-gray-600 mb-4 text-sm">金利変動の中で債券投資はどう変化しているのか。グローバル債券市場の動向と日本の投資家が意識すべきポイントを解説します。</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">2025年4月15日</span>
+                            <a href="#" class="text-primary hover:text-primary-dark transition-all">続きを読む</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-lg article-card">
+                    <div class="hover-zoom h-48 md:h-56">
+                        <img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="相続対策" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-5">
+                        <span class="bg-primary-light text-white px-2 py-1 rounded text-xs">相続</span>
+                        <h3 class="text-xl font-bold my-2 text-primary-dark">円滑な資産承継のための相続税対策最新動向</h3>
+                        <p class="text-gray-600 mb-4 text-sm">改正相続税法を踏まえた効果的な相続対策とは。家族の将来を見据えた資産承継の最新トレンドと専門家のアドバイス。</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">2025年4月14日</span>
+                            <a href="#" class="text-primary hover:text-primary-dark transition-all">続きを読む</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-lg article-card">
+                    <div class="hover-zoom h-48 md:h-56">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="経営者向け資産運用" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-5">
+                        <span class="bg-primary-light text-white px-2 py-1 rounded text-xs">経営者</span>
+                        <h3 class="text-xl font-bold my-2 text-primary-dark">オーナー経営者のための事業承継と個人資産防衛戦略</h3>
+                        <p class="text-gray-600 mb-4 text-sm">事業と個人資産の効果的な分離と承継方法。企業オーナーが直面する課題と実践的な解決策を専門家が解説します。</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">2025年4月11日</span>
+                            <a href="#" class="text-primary hover:text-primary-dark transition-all">続きを読む</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Special Feature Section -->
+        <section class="mb-16 bg-primary rounded-xl overflow-hidden shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-2">
+                <div class="p-8 md:p-12 flex flex-col justify-center">
+                    <span class="bg-accent text-primary-dark px-3 py-1 rounded-md text-sm font-medium mb-3 inline-block">特集</span>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">IFAが提案する新しい資産管理の形</h2>
+                    <p class="text-white text-opacity-90 mb-6">従来の金融機関とは一線を画す、独立系ファイナンシャルアドバイザー（IFA）の役割と利点。個別最適な資産運用アドバイスの実践例と選び方を解説します。</p>
+                    <a href="#" class="bg-white text-primary px-6 py-3 rounded-md inline-block hover:bg-accent hover:text-primary-dark transition-all w-max font-medium">詳しく見る <i class="fas fa-arrow-right ml-2"></i></a>
+                </div>
+                <div class="hidden md:block relative h-full">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="IFA特集" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommended Articles -->
+        <section class="mb-16">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-primary-dark">おすすめ記事</h2>
+                <a href="#" class="text-primary hover:text-primary-dark transition-all flex items-center">
+                    すべて見る <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Article 1 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-lg article-card">
+                    <div class="hover-zoom h-40">
+                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="IFA" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <span class="bg-primary-light text-white px-2 py-1 rounded text-xs">IFA</span>
+                        <h3 class="text-lg font-bold my-2 text-primary-dark">IFAとの資産運用で得られる3つのメリット</h3>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">2025年4月10日</span>
+                            <a href="#" class="text-primary hover:text-primary-dark transition-all text-sm">続きを読む</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-lg article-card">
+                    <div class="hover-zoom h-40">
+                        <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="債券投資" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <span class="bg-primary-light text-white px-2 py-1 rounded text-xs">債券</span>
+                        <h3 class="text-lg font-bold my-2 text-primary-dark">2025年の債券市場見通しと投資戦略</h3>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">2025年4月9日</span>
+                            <a href="#" class="text-primary hover:text-primary-dark transition-all text-sm">続きを読む</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-lg article-card">
+                    <div class="hover-zoom h-40">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="ラップ口座" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <span class="bg-primary-light text-white px-2 py-1 rounded text-xs">資産運用</span>
+                        <h3 class="text-lg font-bold my-2 text-primary-dark">ラップ口座の活用方法とパフォーマンス分析</h3>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">2025年4月8日</span>
+                            <a href="#" class="text-primary hover:text-primary-dark transition-all text-sm">続きを読む</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-lg article-card">
+                    <div class="hover-zoom h-40">
+                        <img src="https://images.unsplash.com/photo-1574607383476-f517f260d30b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="債券投資" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <span class="bg-primary-light text-white px-2 py-1 rounded text-xs">債券</span>
+                        <h3 class="text-lg font-bold my-2 text-primary-dark">債券投資における金利変動リスクの対処法</h3>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">2025年4月7日</span>
+                            <a href="#" class="text-primary hover:text-primary-dark transition-all text-sm">続きを読む</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="mb-16">
+            <h2 class="text-2xl md:text-3xl font-bold text-primary-dark mb-6">カテゴリー別記事</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Investment Category -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-primary-dark">資産運用</h3>
+                        <a href="#" class="text-primary hover:text-primary-dark transition-all">もっと見る</a>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <div class="w-20 h-20 bg-gray-200 rounded-md flex-shrink-0 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="資産配分" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary-dark">最適な資産配分の考え方：リスクとリターンのバランス</h4>
+                                <p class="text-sm text-gray-600 mt-1">リスク許容度に合わせた資産配分の方法と実践例...</p>
+                                <span class="text-xs text-gray-500">2025年4月3日</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-20 h-20 bg-gray-200 rounded-md flex-shrink-0 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1621264448670-812a3e5c9538?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="ポートフォリオ" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary-dark">インフレ対応型ポートフォリオの構築方法</h4>
+                                <p class="text-sm text-gray-600 mt-1">インフレリスクに備えるための資産選択と比率...</p>
+                                <span class="text-xs text-gray-500">2025年3月28日</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-20 h-20 bg-gray-200 rounded-md flex-shrink-0 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1642543349642-f26bf8c7a646?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="ETF投資" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary-dark">ETF活用術：グローバル分散投資の効率的方法</h4>
+                                <p class="text-sm text-gray-600 mt-1">様々なETFを活用した国際分散投資の実践方法...</p>
+                                <span class="text-xs text-gray-500">2025年3月21日</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tax Planning Category -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-primary-dark">税金対策</h3>
+                        <a href="#" class="text-primary hover:text-primary-dark transition-all">もっと見る</a>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <div class="w-20 h-20 bg-gray-200 rounded-md flex-shrink-0 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1586486855514-8c762428304f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="節税対策" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary-dark">富裕層のための合法的節税戦略：最新動向</h4>
+                                <p class="text-sm text-gray-600 mt-1">税制改正を踏まえた最新の節税アプローチ...</p>
+                                <span class="text-xs text-gray-500">2025年4月2日</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-20 h-20 bg-gray-200 rounded-md flex-shrink-0 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="海外投資と税金" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary-dark">海外投資にまつわる税金の仕組みと申告方法</h4>
+                                <p class="text-sm text-gray-600 mt-1">国際投資における税務上の注意点と対策...</p>
+                                <span class="text-xs text-gray-500">2025年3月25日</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-20 h-20 bg-gray-200 rounded-md flex-shrink-0 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="事業承継と税金" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary-dark">事業承継における税負担軽減の実践的アプローチ</h4>
+                                <p class="text-sm text-gray-600 mt-1">円滑な事業承継のための税務戦略と活用可能な特例...</p>
+                                <span class="text-xs text-gray-500">2025年3月18日</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seminar Section -->
+        <section class="mb-16 bg-gradient-to-r from-primary to-primary-dark rounded-xl overflow-hidden shadow-xl text-white p-8">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-6 md:mb-0 md:mr-8">
+                        <h2 class="text-2xl md:text-3xl font-bold mb-3">資産形成セミナー</h2>
+                        <p class="mb-4">富裕層に特化した資産運用セミナーを定期開催しています。最新の市場動向や税制改正、相続対策など、専門家が詳しく解説します。</p>
+                        <div class="mb-6">
+                            <h3 class="font-bold text-lg mb-2">次回セミナー</h3>
+                            <p class="mb-1"><i class="far fa-calendar-alt mr-2"></i>2025年5月15日（木）14:00-16:00</p>
+                            <p class="mb-1"><i class="fas fa-map-marker-alt mr-2"></i>東京都千代田区丸の内</p>
+                            <p><i class="fas fa-tag mr-2"></i>テーマ：2025年後半の世界経済見通しと資産防衛戦略</p>
+                        </div>
+                        <a href="#" class="bg-accent text-primary-dark px-6 py-3 rounded-md inline-block hover:bg-white transition-all font-medium">セミナー詳細・お申し込み</a>
+                    </div>
+                    <div class="w-full md:w-1/3 bg-white p-5 rounded-lg text-primary-dark">
+                        <h3 class="font-bold text-lg mb-3">直近開催セミナー</h3>
+                        <ul class="space-y-3">
+                            <li class="pb-3 border-b border-gray-200">
+                                <p class="font-bold">相続税対策の最新動向</p>
+                                <p class="text-sm text-gray-600">2025年4月18日開催</p>
+                            </li>
+                            <li class="pb-3 border-b border-gray-200">
+                                <p class="font-bold">富裕層のためのグローバル資産配分</p>
+                                <p class="text-sm text-gray-600">2025年3月22日開催</p>
+                            </li>
+                            <li>
+                                <p class="font-bold">医師のための資産防衛戦略</p>
+                                <p class="text-sm text-gray-600">2025年2月15日開催</p>
+                            </li>
+                        </ul>
+                        <a href="#" class="text-primary mt-3 inline-block hover:text-primary-dark transition-all">過去のセミナー一覧 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expert Interview -->
+        <section class="mb-16">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-primary-dark">専門家インタビュー</h2>
+                <a href="#" class="text-primary hover:text-primary-dark transition-all flex items-center">
+                    すべて見る <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+            <div class="bg-white rounded-xl overflow-hidden shadow-lg">
+                <div class="grid grid-cols-1 md:grid-cols-2">
+                    <div class="p-8 md:p-10">
+                        <span class="bg-primary-light text-white px-2 py-1 rounded text-xs mb-4 inline-block">対談</span>
+                        <h3 class="text-2xl font-bold text-primary-dark mb-4">世界的な金融環境変化と日本の富裕層が取るべき投資戦略</h3>
+                        <p class="text-gray-600 mb-6">グローバル経済の構造変化が進む中、日本の投資家はどのように資産を守り、増やすべきか。国際的な投資戦略家と日本の資産運用の専門家による対談を掲載。</p>
+                        <div class="flex mb-6">
+                            <div class="mr-6">
+                                <div class="w-16 h-16 rounded-full bg-gray-300 mb-2 overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="John Smith" class="w-full h-full object-cover">
+                                </div>
+                                <p class="text-center text-sm font-bold">John Smith</p>
+                                <p class="text-center text-xs text-gray-500">Global Strategist</p>
+                            </div>
+                            <div>
+                                <div class="w-16 h-16 rounded-full bg-gray-300 mb-2 overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="佐藤誠" class="w-full h-full object-cover">
+                                </div>
+                                <p class="text-center text-sm font-bold">佐藤誠</p>
+                                <p class="text-center text-xs text-gray-500">資産運用アドバイザー</p>
+                            </div>
+                        </div>
+                        <a href="#" class="text-white bg-primary px-6 py-3 rounded-md inline-block hover:bg-primary-dark transition-all">インタビューを読む <i class="fas fa-arrow-right ml-2"></i></a>
+                    </div>
+                    <div class="hidden md:block relative">
+                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Expert Interview" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Subscription -->
+        <section class="mb-16 bg-white rounded-xl overflow-hidden shadow-lg p-8">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-2xl md:text-3xl font-bold text-primary-dark mb-3">最新情報をお届けします</h2>
+                <p class="text-gray-600 mb-6 max-w-2xl mx-auto">WEALTH JOURNALのメールマガジンでは、資産運用の最新トレンドや専門家の見解、セミナー情報などをいち早くお届けします。</p>
+                <form class="max-w-lg mx-auto">
+                    <div class="flex flex-col md:flex-row gap-3">
+                        <input type="email" placeholder="メールアドレス" class="flex-grow px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <button type="submit" class="bg-primary text-white px-6 py-3 rounded-md hover:bg-primary-dark transition-all whitespace-nowrap">登録する</button>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-3">※ご登録いただいたメールアドレスは、WEALTH JOURNALからの情報提供にのみ使用します。</p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary-dark text-white">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <a href="#" class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center mr-2">
+                            <span class="text-primary-dark font-bold text-xl">W</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white serif tracking-wide">WEALTH JOURNAL</h3>
+                    </a>
+                    <p class="text-gray-300 mb-4">富裕層向け資産運用メディア</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-accent transition-all"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white hover:text-accent transition-all"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-white hover:text-accent transition-all"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-white hover:text-accent transition-all"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">カテゴリー</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">IFA</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">債券</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">ヘッジファンド</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">不動産</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">資産運用</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">相続</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">税金</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">ターゲット別</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">経営者</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">医師</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">会社員</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">講座</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">経済</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">ライフスタイル</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">対談</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">サービス</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">セミナー情報</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">個別相談</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">資産運用診断</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">お問い合わせ</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">会社概要</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">運営者情報</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2025 WEALTH JOURNAL All Rights Reserved.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-all">プライバシーポリシー</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-all">利用規約</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-all">特定商取引法に基づく表記</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Navigation Menu (Hidden by default) -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden" id="mobile-menu-overlay">
+        <div class="bg-white h-full w-4/5 max-w-sm p-5 transform transition-transform duration-300" id="mobile-menu">
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-primary-dark rounded-full flex items-center justify-center mr-2">
+                        <span class="text-white font-bold text-lg">W</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-primary-dark">WEALTH JOURNAL</h3>
+                </div>
+                <button class="text-2xl text-primary-dark" id="close-menu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="mb-6">
+                <h4 class="text-lg font-bold text-primary-dark mb-3">メニュー</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="block text-primary-dark hover:text-primary transition-all">ホーム</a></li>
+                    <li><a href="#" class="block text-primary-dark hover:text-primary transition-all">最新記事</a></li>
+                    <li><a href="#" class="block text-primary-dark hover:text-primary transition-all">人気記事</a></li>
+                    <li><a href="#" class="block text-primary-dark hover:text-primary transition-all">セミナー</a></li>
+                    <li><a href="#" class="block text-primary-dark hover:text-primary transition-all">サービス</a></li>
+                </ul>
+            </div>
+            <div class="mb-6">
+                <h4 class="text-lg font-bold text-primary-dark mb-3">カテゴリー</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="block text-primary-dark hover:text-primary transition-all">IFA</a></li>
+                    <li><a href="#" class="block text-primary-dark hover:text-primary transition-all">債券</a></li>
+                    <li><a href="#" class="block text-primary-dark hover:text-primary transition-all">ヘッジファンド</a></li>
+                    <li><a href="#" class="block text-primary-dark hover:text-primary transition-all">不動産</a></li>
+                    <li><a href="#" class="block text-primary-dark hover:text-primary transition-all">資産運用</a></li>
+                    <li><a href="#" class="block text-primary-dark hover:text-primary transition-all">相続</a></li>
+                    <li><a href="#" class="block text-primary-dark hover:text-primary transition-all">税金</a></li>
+                    <li><a href="#" class="block text-primary-dark hover:text-primary transition-all">経営者</a></li>
+                    <li><a href="#" class="block text-primary-dark hover:text-primary transition-all">医師</a></li>
+                </ul>
+            </div>
+            <div class="mt-8">
+                <a href="#" class="block w-full bg-primary text-white text-center py-3 rounded-md hover:bg-primary-dark transition-all">お問い合わせ</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple script to toggle mobile menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.querySelector('.md\\:hidden');
+            const closeBtn = document.getElementById('close-menu');
+            const mobileOverlay = document.getElementById('mobile-menu-overlay');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (menuBtn && closeBtn && mobileOverlay) {
+                menuBtn.addEventListener('click', function() {
+                    mobileOverlay.classList.remove('hidden');
+                    mobileMenu.classList.add('translate-x-0');
+                    mobileMenu.classList.remove('-translate-x-full');
+                });
+
+                closeBtn.addEventListener('click', function() {
+                    mobileOverlay.classList.add('hidden');
+                    mobileMenu.classList.remove('translate-x-0');
+                    mobileMenu.classList.add('-translate-x-full');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
